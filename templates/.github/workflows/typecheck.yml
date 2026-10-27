@@ -1,0 +1,54 @@
+name: typecheck
+
+on:
+  pull_request:
+  push:
+    branches: [dev, staging, main]
+
+permissions:
+  contents: read
+
+env:
+  # The tsconfig that actually includes your source. For a Vite "solution" tsconfig with
+  # references and `files: []`, point this at the app config (e.g. tsconfig.app.json).
+  TSCONFIG: tsconfig.json
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Fail closed: a missing config or an empty file list means this gate checked nothing.
+      - name: Refuse to check nothing
+        run: |
+          if [ ! -f "$TSCONFIG" ]; then
+            echo "::error::$TSCONFIG not found. This gate proved NOTHING — treat it as failed."
+            exit 1
+          fi
+          # tsc prints config errors (e.g. TS18003 "no inputs") to stdout, so count only real
+          # TypeScript paths, and treat a failing listing as a gate that could not run.
+          set +e
+          list=$(pnpm exec tsc -p "$TSCONFIG" --listFilesOnly 2>&1)
+          code=$?
+          set -e
+          if [ "$code" -ne 0 ]; then
+            echo "$list" | head -20
+            echo "::error::tsc could not list the project's files (exit $code). This gate proved NOTHING — treat it as failed."
+            exit 1
+          fi
+          files=$(printf '%s\n' "$list" | awk '/\.[cm]?tsx?$/ && !/node_modules/' | wc -l)
+          echo "TypeScript will check $files project files."
+          if [ "$files" -eq 0 ]; then
+            echo "::error::$TSCONFIG includes no source files. Refusing to report success for a check that examined nothing."
+            exit 1
+          fi
+
+      - name: Typecheck
+        run: pnpm exec tsc -p "$TSCONFIG" --noEmit

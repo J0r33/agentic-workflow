@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(gh pr merge:*)",
+      "Bash(gh api *pulls/*/merge*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin staging:*)",
+      "Bash(git push origin dev:*)",
+      "Bash(git stash:*)",
+      "Bash(supabase db push:*)",
+      "Bash(vercel deploy --prod:*)"
+    ]
+  }
+}
