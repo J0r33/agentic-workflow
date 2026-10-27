@@ -20,7 +20,7 @@ stay with a person.
 ## How a ticket flows
 
 ```mermaid
-flowchart LR
+flowchart TB
     T[Ticket] --> B1["1 · Pick up &amp; check claims<br/>/check-claims"]
     B1 --> B2["2 · Design, challenge, build<br/>/design → operator picks → dissenter"]
     B2 --> B3["3 · Prove it<br/>gates + proof menu"]
