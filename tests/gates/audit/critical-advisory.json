@@ -1,0 +1,15 @@
+{
+  "advisories": {
+    "1096302": {
+      "id": 1096302,
+      "github_advisory_id": "GHSA-aaaa-bbbb-cccc",
+      "severity": "critical",
+      "module_name": "example-lib",
+      "title": "Prototype pollution in example-lib",
+      "url": "https://github.com/advisories/GHSA-aaaa-bbbb-cccc"
+    }
+  },
+  "metadata": {
+    "totalDependencies": 412
+  }
+}

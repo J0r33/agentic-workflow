@@ -1,5 +1,9 @@
 # agentic-workflow
 
+[![gate-selftest](https://github.com/J0r33/agentic-workflow/actions/workflows/gate-selftest.yml/badge.svg)](https://github.com/J0r33/agentic-workflow/actions/workflows/gate-selftest.yml)
+[![secret-scan](https://github.com/J0r33/agentic-workflow/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/J0r33/agentic-workflow/actions/workflows/secret-scan.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A per-ticket workflow for building production software with AI coding agents while a human stays
 accountable for what ships. It is a set of [Claude Code](https://docs.claude.com/en/docs/claude-code)
 commands, subagent definitions, a project contract, and CI gate templates.
@@ -43,6 +47,17 @@ Releases go out in waves. Several tickets land on `dev`, the wave is promoted to
 then to `main`. `/wave-sweep` closes out a wave: it collects the follow-ups agents left in PR bodies
 before the tickets auto-close and the follow-ups disappear.
 
+## See it run
+
+- **[One ticket, start to finish](docs/example-run.md).** A real payments bug from the platform this
+  runs, followed through all five beats: reproduced first, tests red before the fix, a six-judge
+  review with its disagreements answered in writing, a blast-radius trace tied to a commit, 22 CI
+  checks, and two checks left to the operator.
+- **The gates check themselves.** On every push, [`gate-selftest`](.github/workflows/gate-selftest.yml)
+  runs each gate template against [fixtures](tests/gates/) with known answers: 3 that must pass and
+  11 that must fail, each for a stated reason. If a gate stops going red, the self-test does.
+- **This repo uses its own gates.** Pull requests here run the PR quality gate and gitleaks.
+
 ## Why each gate exists
 
 The short version is below. [`docs/gates.md`](docs/gates.md) has the full table.
@@ -85,10 +100,12 @@ docs/
   gates.md                     why each gate exists
   ticket-checklist.md          the five beats as a one-page checklist
   review-prompts.md            the reviewer roles as paste-anywhere prompts
+  example-run.md               one real ticket through all five beats
 templates/                     copy into your project
   .github/PULL_REQUEST_TEMPLATE.md
   .github/workflows/           typecheck, secret-scan (gitleaks), dependency-audit, pr-quality-gate
   scripts/                     audit-gate.mjs, pr-quality-gate.mjs (no dependencies)
+tests/gates/                   pass and fail fixtures for every gate, and the runner CI uses
 ```
 
 ## Using it

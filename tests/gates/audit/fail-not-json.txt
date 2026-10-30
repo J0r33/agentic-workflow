@@ -1,0 +1,1 @@
+ERR_PNPM_FETCH_503  GET https://registry.npmjs.org/-/npm/v1/security/audits: Service Unavailable

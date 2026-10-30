@@ -1,0 +1,6 @@
+{
+  "pull_request": {
+    "title": "quick fix",
+    "body": "## Summary\n\nAdds the five-beat checklist to the docs.\n\nTicket: GH-1\n\n## Blast radius\n\nTraced commit: `3e8090c`\nRisk: LOW\n\n- [x] README links still resolve — PASS — checked each relative link\n\n## Testing\n\n- [x] proof in the running app (screenshot or output)\n\n## Database changes\n\nNone.\n\n## Operator\n\nNothing."
+  }
+}
