@@ -1,0 +1,7 @@
+[
+  {
+    "id": "GHSA-aaaa-bbbb-cccc",
+    "reason": "Only reachable through the CLI build step, never at runtime.",
+    "expires": "2020-01-31"
+  }
+]

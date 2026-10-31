@@ -1,0 +1,15 @@
+{
+  "advisories": {
+    "1096303": {
+      "id": 1096303,
+      "github_advisory_id": "GHSA-dddd-eeee-ffff",
+      "severity": "low",
+      "module_name": "other-lib",
+      "title": "Minor issue",
+      "url": "https://github.com/advisories/GHSA-dddd-eeee-ffff"
+    }
+  },
+  "metadata": {
+    "totalDependencies": 412
+  }
+}

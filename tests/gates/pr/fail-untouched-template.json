@@ -1,0 +1,6 @@
+{
+  "pull_request": {
+    "title": "docs(GH-1): add the five-beat checklist",
+    "body": "## Summary\n\n<!-- What changed and why, in two or three sentences. Link the ticket. -->\n\nTicket:\n\n## Blast radius\n\n<!-- Paste beat 4's report. Keep the traced commit; the quality gate checks for it. -->\n\nTraced commit:\nRisk: LOW / MEDIUM / HIGH\n\n- [ ] <checklist item> — PASS / FAIL / operator — <what you saw>\n\n## Testing\n\n<!-- Beat 3's proof, as measurements. Name every gate, including any you could not run and why. -->\n\n- [ ] typecheck\n- [ ] lint\n- [ ] tests\n- [ ] proof in the running app (screenshot or output)\n\n## Database changes\n\n<!-- New migrations, policies or grants, and how they were replayed locally. \"None\" is an answer. -->\n\n## Operator\n\n<!-- Anything only the operator can do: checks on staging or production, with exact steps. -->\n"
+  }
+}
