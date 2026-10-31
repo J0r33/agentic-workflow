@@ -57,6 +57,10 @@ before the tickets auto-close and the follow-ups disappear.
   runs each gate template against [fixtures](tests/gates/) with known answers: 3 that must pass and
   11 that must fail, each for a stated reason. If a gate stops going red, the self-test does.
 - **This repo uses its own gates.** Pull requests here run the PR quality gate and gitleaks.
+- **[See them fail](https://github.com/J0r33/agentic-workflow/pull/3).** A planted bad change: a
+  hardcoded token-shaped string, and a PR that skips its blast radius. gitleaks flags the token
+  (`square-access-token`, line 5), and the quality gate lists all seven things the PR is missing.
+  The PR was closed unmerged, and its check logs stay readable.
 
 ## Why each gate exists
 
